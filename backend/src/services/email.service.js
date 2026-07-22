@@ -1,14 +1,14 @@
 import { Resend } from 'resend';
-import "dotenv/config"
+import ENV from '../lib/env.js';
 import {registerEmailFormat} from "./registerEmailFormat.js"
 import {loginEmailFormat} from "./loginEmailFormat.js"
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(ENV.resend_api_key);
 
 export async function sendRegisterEmail (name, email) {
     
   const { data, error } = await resend.emails.send({
-    from: `ChatVibe <${process.env.FORM_EMAIL}>`,
+    from: `ChatVibe <${ENV.resend_from_email}>`,
     to: [email],
     subject: `Welcome ${name}`,
     html: registerEmailFormat(name),
@@ -27,7 +27,7 @@ export async function sendLoginEmail (name, email) {
     // console.log(typeof html);
     
   const { data, error } = await resend.emails.send({
-    from: `ChatVibe <${process.env.FORM_EMAIL}>`,
+    from: `ChatVibe <${ENV.resend_from_email}>`,
     to: [email],
     subject: `New Login Detected, ${name}`,
     html,

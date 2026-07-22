@@ -1,11 +1,10 @@
 import express from "express"
-import dotenv from "dotenv"
+import ENV from "./lib/env.js"
 import  ConnectDb  from "./lib/ConnectDB.js"
 import path from "path"
 import authRoute from "./routes/auth.route.js"
 import cookieParser from "cookie-parser"
 
-dotenv.config()
 
 const app = express()
 app.use(express.urlencoded({ extended: false }))
@@ -18,7 +17,7 @@ const __dirname = path.resolve()
 
 app.use("/api/auth", authRoute)
 
-if(process.env.NODE_ENV === "production"){
+if(ENV.node_environment === "production"){
 
     app.use(express.static(path.join(__dirname, "../frontend/dist")))
 
@@ -27,7 +26,7 @@ if(process.env.NODE_ENV === "production"){
     })
 }
 
-app.listen(process.env.port, () => {
-    console.log(`Server started at port: ${process.env.port}`)
+app.listen(ENV.port, () => {
+    console.log(`Server started at port: ${ENV.port}`)
     ConnectDb()
 })

@@ -2,6 +2,7 @@ import userModel from "../models/User.js";
 import bcrypt from "bcryptjs";
 import {generateToken} from "../lib/jwtGenerator.js"
 import cloudinary from "../lib/cloudinary.js";
+
 import {sendRegisterEmail, sendLoginEmail} from "../services/email.service.js"
 
 export async function signupHandler(req, res) {
