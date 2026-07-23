@@ -19,7 +19,7 @@ export  async function checkUserLogin(req, res, next) {
             })
         }
 
-     res.user=userAccount
+     req.user=userAccount
      next()
      
     } catch (error) {

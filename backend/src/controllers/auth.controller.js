@@ -137,7 +137,7 @@ export async function updateProfileHandler(req, res) {
       })
     }
     const uploadResponse = await cloudinary.uploader.upload(profileImg)
-    await userModel.findOneAndUpdate(res.user._id, {
+    await userModel.findOneAndUpdate(req.user._id, {
       profileImg: uploadResponse.secure_url
     })
     

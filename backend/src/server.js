@@ -3,6 +3,7 @@ import ENV from "./lib/env.js"
 import  ConnectDb  from "./lib/ConnectDB.js"
 import path from "path"
 import authRoute from "./routes/auth.route.js"
+import messageRoute from "./routes/message.route.js"
 import cookieParser from "cookie-parser"
 
 
@@ -16,6 +17,7 @@ const __dirname = path.resolve()
 
 
 app.use("/api/auth", authRoute)
+app.use("/api/message", messageRoute)
 
 if(ENV.node_environment === "production"){
 
