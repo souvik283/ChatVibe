@@ -1,22 +1,19 @@
 
 @charset "UTF-8";
 
-/***********************************
-			/* 1. BODY */
-/***********************************/
 
-* {
+.errorPage {
   margin: 0;
   padding: 0;
   -webkit-text-size-adjust: none;
 }
 
-html, body {
+.errorPage html, .errorPage body {
   height: 100%;
   overflow: hidden;
 }
 
-body {
+.errorPage body {
   padding: 0;
   margin: 0;
   background: #181828;
@@ -24,11 +21,11 @@ body {
   line-height: 1;
 }
 
-label {
+.errorPage label {
   cursor: pointer;
 }
 
-a {
+.errorPage a {
   margin: 0;
   padding: 0;
   vertical-align: baseline;
@@ -37,15 +34,72 @@ a {
   color: #000;
 }
 
-input, select, button, textarea {
+.errorPage input, .errorPage select, .errorPage button, .errorPage textarea {
   margin: 0;
   font-size: 100%;
 }
 
-html, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, input {
+.errorPage div,
+.errorPage span,
+.errorPage applet,
+.errorPage object,
+.errorPage iframe,
+.errorPage h1,
+.errorPage h2,
+.errorPage h3,
+.errorPage h4,
+.errorPage h5,
+.errorPage h6,
+.errorPage p,
+.errorPage blockquote,
+.errorPage pre,
+.errorPage a,
+.errorPage abbr,
+.errorPage acronym,
+.errorPage address,
+.errorPage big,
+.errorPage cite,
+.errorPage code,
+.errorPage del,
+.errorPage dfn,
+.errorPage em,
+.errorPage font,
+.errorPage img,
+.errorPage ins,
+.errorPage kbd,
+.errorPage q,
+.errorPage s,
+.errorPage samp,
+.errorPage small,
+.errorPage strike,
+.errorPage strong,
+.errorPage sub,
+.errorPage sup,
+.errorPage tt,
+.errorPage var,
+.errorPage b,
+.errorPage u,
+.errorPage i,
+.errorPage center,
+.errorPage dl,
+.errorPage dt,
+.errorPage dd,
+.errorPage ol,
+.errorPage ul,
+.errorPage li,
+.errorPage fieldset,
+.errorPage form,
+.errorPage label,
+.errorPage legend,
+.errorPage table,
+.errorPage caption,
+.errorPage tbody,
+.errorPage tfoot,
+.errorPage thead,
+.errorPage tr,
+.errorPage th,
+.errorPage td,
+.errorPage input {
   border: 0;
   outline: 0;
   font-size: 100%;
@@ -54,10 +108,10 @@ fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, 
 }
 
 
-.top-header:before {
+.errorPage .top-header:before {
     background-image: url(https://1.bp.blogspot.com/-gxsOcYWghHA/Xp_izTh4sFI/AAAAAAAAU8s/y637Fwg99qAuzW9na_NT_uApny8Vce95gCEwYBhgL/s1600/header-footer-gradient-bg.png);
 }
-.top-header:before {
+.errorPage .top-header:before {
     content: '';
     display: block;
     width: 100%;
@@ -71,7 +125,7 @@ fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, 
 }
 
 
-.starsec{
+.errorPage .starsec{
   content: " ";
     position: absolute;
     width: 3px;
@@ -81,7 +135,7 @@ fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, 
   animation: animStar 150s linear infinite;
 }
 
-.starthird
+.errorPage .starthird
 {
   content: " ";
     position: absolute;
@@ -92,7 +146,7 @@ fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, 
   animation: animStar 10s linear infinite;
 }
 
-.starfourth
+.errorPage .starfourth
 {
   content: " ";
     position: absolute;
@@ -103,7 +157,7 @@ fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, 
   animation: animStar 50s linear infinite;
 }
 
-.starfifth
+.errorPage .starfifth
 {
   content: " ";
     position: absolute;
@@ -126,7 +180,7 @@ fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, 
 
 
 
-button {
+.errorPage button {
   border: none;
   padding: 0;
   font-size: 0;
@@ -139,18 +193,18 @@ button {
   outline: 0;
 }
 
-.clearfix:before, .clearfix:after {
+.errorPage .clearfix:before, .errorPage .clearfix:after {
   content: "\0020";
   display: block;
   height: 0;
   visibility: hidden;
 }
 
-.clearfix:after {
+.errorPage .clearfix:after {
   clear: both;
 }
 
-.clearfix {
+.errorPage .clearfix {
   zoom: 1;
 }
 
@@ -161,7 +215,7 @@ button {
 			/* 2. CONTENT */
 /***********************************/
 /* 2.1. Section error */
-.error {
+.errorPage  .error {
   min-height: 100vh;
   position: relative;
   padding: 240px 0;
@@ -172,7 +226,7 @@ button {
   margin-top: 70px;
 }
 
-.error__overlay {
+.errorPage .error__overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -181,7 +235,7 @@ button {
   overflow: hidden;
 }
 
-.error__content {
+.errorPage .error__content {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -190,12 +244,12 @@ button {
           transform: translate(-50%, -50%);
 }
 
-.error__message {
+.errorPage .error__message {
   text-align: center;
   color: #181828;
 }
 
-.message__title {
+.errorPage .message__title {
   font-family: 'Montserrat', sans-serif;
   font-weight: 900;
   text-transform: uppercase;
@@ -206,7 +260,7 @@ button {
   margin: 0 auto;
 }
 
-.message__text {
+.errorPage .message__text {
   font-family: 'Montserrat', sans-serif;
   line-height: 42px;
   font-size: 18px;
@@ -215,13 +269,13 @@ button {
   margin: auto;
 }
 
-.error__nav {
+.errorPage .error__nav {
   max-width: 600px;
   margin: 40px auto 0;
   text-align: center;
 }
 
-.e-nav__form {
+.errorPage  .e-nav__form {
   position: relative;
   height: 45px;
   overflow: hidden;
@@ -233,7 +287,7 @@ button {
   padding-right: 46px;
 }
 
-.e-nav__icon {
+.errorPage .e-nav__icon {
   position: absolute;
   right: 15px;
   top: 50%;
@@ -244,7 +298,7 @@ button {
   transition: color .25s ease;
 }
 
-.e-nav__link {
+.errorPage .e-nav__link {
   height: 45px;
   line-height: 45px;
   width: 170px;
@@ -262,7 +316,7 @@ button {
   overflow: hidden;
 }
 
-.e-nav__link:before {
+.errorPage .e-nav__link:before {
   content: '';
   height: 200px;
   background: #212121;
@@ -276,33 +330,33 @@ button {
           transform: rotate(50deg);
 }
 
-.e-nav__link:after {
+.errorPage .e-nav__link:after {
   -webkit-transition: all .3s;
   transition: all .3s;
   z-index: 999;
   position: relative;
 }
 
-.e-nav__link:after {
+.errorPage .e-nav__link:after {
   content: "Home Page";
 }
 
-.e-nav__link:hover:before {
+.errorPage .e-nav__link:hover:before {
   top: -60px;
   right: -50px;
 }
 
-.e-nav__link:hover {
+.errorPage .e-nav__link:hover {
   color: #fff;
 }
 
-.e-nav__link:nth-child(2):hover:after {
+.errorPage .e-nav__link:nth-child(2):hover:after {
   color: #fff;
 }
 /* 2.1. END Section Error */
 
 /* 2.2. Social style */
-.error__social {
+.errorPage .error__social {
   position: absolute;
   top: 50%;
   -webkit-transform: translateY(-50%);
@@ -311,34 +365,34 @@ button {
   z-index: 10;
 }
 
-.e-social__list {
+.errorPage .e-social__list {
   margin: 0;
   padding: 0;
   list-style-type: none;
 }
 
-.e-social__icon {
+.errorPage .e-social__icon {
   padding-bottom: 30px;
 }
 
-.e-social__icon:last-child {
+.errorPage .e-social__icon:last-child {
   padding-bottom: 0;
 }
 
-.e-social__link {
+.errorPage .e-social__link {
   color: #fff;
   -webkit-transition: all .25s ease;
   transition: all .25s ease;
   display: block;
 }
 
-.e-social__link:hover {
+.errorPage .e-social__link:hover {
   opacity: .7;
 }
 /* 2.2. END Social style */
 
 /* 2.3. Lamp */
-.lamp {
+.errorPage .lamp {
   position: absolute;
   left: 0px;
   right: 0px;
@@ -365,13 +419,13 @@ button {
   }
 }
 
-.cable {
+.errorPage .cable {
   width: 8px;
     height: 248px;
     background-image: linear-gradient(rgb(32 148 218 / 70%), rgb(193 65 25)), linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7));
 }
 
-.cover {
+.errorPage .cover {
   width: 200px;
   height: 80px;
   background: #0bd5e8;
@@ -381,7 +435,7 @@ button {
   z-index: 200;
 }
 
-.in-cover {
+.errorPage .in-cover {
   width: 100%;
   max-width: 200px;
   height: 20px;
@@ -394,7 +448,7 @@ button {
   bottom: -9px;
   z-index: 100;
 }
-.in-cover .bulb {
+.errorPage .in-cover .bulb {
      width: 50px;
     height: 50px;
     background-color: #08fffa;
@@ -409,7 +463,7 @@ button {
 }
 
 
-.light {
+.errorPage .light {
       width: 200px;
     height: 0px;
     border-bottom: 900px solid rgb(44 255 255 / 24%);
@@ -431,38 +485,38 @@ button {
 /***********************************
 			/* 3. RESPONSIVE */
 /***********************************/
-.error {
+.errorPage .error {
   overflow: hidden;
   max-height: 100vh;
 }
 @media (max-width: 1400px) { 
-  .lamp {
+  .errorPage .lamp {
     zoom: .5;
   }
-  .error__content {
+  .errorPage .error__content {
     top: 55%;
   }
-  .message__title {
+  .errorPage .message__title {
     font-size: 3.5rem;
   }
 }
 @media (max-width: 900px) {
 
-  .message__title {
+  .errorPage .message__title {
     font-size: 34px;
 
   }
-  .error__content {
+  .errorPage .error__content {
     top: 55%;
   }
   }
 @media (max-width: 950px) {
-  .lamp__wrap {
+  .errorPage .lamp__wrap {
     max-height: 100vh;
     overflow: hidden;
     max-width: 100vw;
   }
-  .error__social {
+  .errorPage .error__social {
     bottom: 30px;
     top: auto;
     transform: none;
@@ -470,62 +524,62 @@ button {
     position: fixed;
     left: 0;
   }
-  .e-social__icon {
+  .errorPage .e-social__icon {
     display: inline-block;
     padding-right: 30px;
   }
-  .e-social__icon:last-child {
+  .errorPage .e-social__icon:last-child {
     padding-right: 0;
   }
-  .e-social__icon {
+  .errorPage .e-social__icon {
     padding-bottom: 0;
   }
 }
 @media (max-width: 750px) {
-  body, html {
+  .errorPage body, .errorPage html {
     max-height: 100vh;
   }
-   .error__content {
+   .errorPage .error__content {
     position: static;
     margin: 0 auto;
     transform: none;
     padding-top: 300px;
   }
-  .error {
+  .errorPage .error {
     padding-top: 0;
     padding-bottom: 100px;
     height: 100vh;
   }
   }
 @media (max-width: 650px) {
-  .message__title {
+  .errorPage .message__title {
     font-size: 36px;
     padding-bottom: 20px;
   }
-  .message__text {
+  .errorPage .message__text {
     font-size: 16px;
     line-height: 2;
     padding-right: 20px;
     padding-left: 20px;
   }
-  .lamp {
+  .errorPage .lamp {
     zoom: .6;
   }
-  .error__content {
+  .errorPage .error__content {
     padding-top: 180px;
   }
   }
 @media (max-width: 480px) {
 
-  .message__title {
+  .errorPage .message__title {
     font-size: 30px;
   }
-  .message__text {
+  .errorPage .message__text {
     padding-left: 10px;
     padding-right: 10px;
     font-size: 15px;
   }
-  .error__nav {
+  .errorPage .error__nav {
     margin-top: 20px;
   }
 }

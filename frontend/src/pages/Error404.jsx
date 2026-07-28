@@ -1,14 +1,12 @@
 import React from 'react'
 import "../css/error.css"
-import { Navigate, Route, Routes } from 'react-router';
 import HomePage from './HomePage';
+import { Link } from 'react-router';
 
 const Error404 = () => {
-    <Routes>
-        <Route path='/'  element={<HomePage/>} />
-    </Routes>
+    
   return (
-    <>
+<div className='errorPage'>
       <header className="top-header"></header>
 
       {/* dust particel */}
@@ -46,15 +44,16 @@ const Error404 = () => {
           </div>
 
           <div className="error__nav e-nav">
-            <a
+            <Link
               className="e-nav__link cursor-pointer rounded-xl"
-              href='http://localhost:5173/'
-            ></a>
+              // href='http://localhost:5173/'
+              to={"/"}
+            ></Link>
           </div>
         </div>
         {/* END Content */}
       </section>
-    </>
+    </div>
   );
 }
 
