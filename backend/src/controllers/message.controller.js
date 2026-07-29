@@ -13,7 +13,9 @@ export async function getAllContactsHandler(req, res) {
       })
       .select("name");
 
-    return res.status(200).json(contactUsers);
+    return res.status(200).json({
+      contactUsers: contactUsers
+    });
   } catch (error) {
     return res.status(500).json({
       message: "Server Error",
@@ -131,7 +133,7 @@ export async function getChatsHandler(req, res) {
     }).select("name")
 
     return res.status(201).json({
-      chatPartners,
+      chatPartners: chatPartners,
     });
   } catch (error) {
     console.log(error);

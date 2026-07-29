@@ -11,7 +11,8 @@ const ENV = {
     cloudinary_api_key: process.env.CLOUDINARY_API_KEY ,
     cloudinary_api_secret: process.env.CLOUDINARY_API_SECRET,
     arcjet_key : process.env.ARCJET_KEY ,
-    arcjet_env: process.env.ARCJET_ENV
+    arcjet_env: process.env.ARCJET_ENV,
+    client_url: process.env.CLIENT_URL
 }
 
 export default ENV

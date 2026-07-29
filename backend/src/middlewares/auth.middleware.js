@@ -6,7 +6,7 @@ export  async function checkUserLogin(req, res, next) {
     try {
      const token = req.cookies.jwt
         if (!token) {
-            res.status(400).json({
+           return  res.status(401).json({
                 message: "Login first then come"
             })
         }

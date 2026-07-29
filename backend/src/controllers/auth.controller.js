@@ -65,6 +65,10 @@ export async function signupHandler(req, res) {
 
       return res.status(201).json({
         message: "Account created successfully",
+        userNew:{
+          name: fullName,
+          email: email
+        }
       });
     } else {
       return res.status(500).json({
