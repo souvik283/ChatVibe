@@ -9,6 +9,7 @@ import Loading from './components/Loading'
 import Error404 from './pages/Error404'
 import {Toaster} from "react-hot-toast";
 import LoaderIcon from './components/LoaderIcon'
+import AuroraChat from './pages/NoFound'
 
 const App = () => {
   const {authUser,isCheckingAuth, checkAuth} = useAuthStore()
@@ -37,6 +38,8 @@ const App = () => {
         <Route path='/login' element = {!authUser ? <LoginPage/> : <Navigate  to={"/chat"}/>} />
         <Route path='/chat' element = {authUser ? <ChatPage/> : <Navigate  to={"/login"}/>} />
         <Route path='*' element = {<Error404/>} />
+        <Route path='/a' element = {<AuroraChat/>} />
+
       </Routes>
       <Toaster/>
   </div>

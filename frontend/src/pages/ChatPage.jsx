@@ -1,6 +1,7 @@
 import React from 'react'
 import { useAuthStore } from '../store/useAuthStore'
 import { Link } from 'react-router'
+import AuroraChat from './NoFound'
 
 const ChatPage = () => {
   const {logout} = useAuthStore()
@@ -10,16 +11,9 @@ const ChatPage = () => {
     logout()
   }
   return (
-    <div>
+    <div className=' flex items-center justify-center min-h-screen'>
+      <AuroraChat/>
       
-      <button
-      className=' px-3 py-2 bg-purple-700 m-3 rounded-md font-bold cursor-pointer'
-      onClick={
-        handleLogout
-      }
-      >
-        Logout
-      </button>
     </div>
   )
 }
