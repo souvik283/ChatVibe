@@ -2,9 +2,11 @@ import express from "express"
 import {signupHandler, loginHandler, logoutHandler, updateProfileHandler} from "../controllers/auth.controller.js"
 import {checkUserLogin} from "../middlewares/auth.middleware.js"
 import arcjectProtection from "../middlewares/arcjet.middleware.js"
+import multer  from "multer"
 
 const router = express.Router()
 
+const upload = multer({ dest: "uploads/" });
 // router.use(arcjectProtection)
 
 router.post("/register", signupHandler)
@@ -18,6 +20,6 @@ router.get("/check",checkUserLogin, (req, res)=>{
     })
 })
 
-router.post("/updateprofile", checkUserLogin, updateProfileHandler)
+router.put("/updateprofile",upload.single("profileImg"), checkUserLogin, updateProfileHandler)
 
 export default router

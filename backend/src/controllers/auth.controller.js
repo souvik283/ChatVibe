@@ -113,8 +113,9 @@ export async function loginHandler(req, res) {
     sendLoginEmail(user.name, user.email)
     return res.status(200).json({
       message: "Logged in successfully",
-      name: user.name,
-      email: user.email
+      user: { name: user.name,
+      email: user.email,
+      profileImg: user.profileImg}
     });
   } catch (err) {
     return res.status(400).json({
@@ -133,15 +134,15 @@ export async function logoutHandler(_, res) {
 
 
 export async function updateProfileHandler(req, res) {
-  try {    
-    const profileImg = req.body
-    if (!profileImg) {
+  try {        
+    
+    if (!req.file) {
       res.status(400).json({
         msg: "please upload profile image first"
       })
     }
-    const uploadResponse = await cloudinary.uploader.upload(profileImg)
-    await userModel.findOneAndUpdate(req.user._id, {
+    const uploadResponse = await cloudinary.uploader.upload(req.file.path)
+    await userModel.findByIdAndUpdate(req.user._id, {
       profileImg: uploadResponse.secure_url
     })
     

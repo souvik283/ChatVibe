@@ -11,7 +11,7 @@ export async function getAllContactsHandler(req, res) {
       .find({
         _id: { $ne: loggedUserId },
       })
-      .select("name");
+      .select("name profileImg");
 
     return res.status(200).json({
       contactUsers: contactUsers
@@ -130,7 +130,7 @@ export async function getChatsHandler(req, res) {
 
     const chatPartners = await userModel.find({
       _id: { $in: chatPartnerId },
-    }).select("name")
+    }).select("name profileImg")
 
     return res.status(201).json({
       chatPartners: chatPartners,
