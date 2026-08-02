@@ -87,7 +87,10 @@ export async function sendMessageToUser(req, res) {
 
     let imageUrl;
     if (image) {
-      const uploadResponse = await cloudinary.uploader.upload(image);
+      const uploadResponse = await cloudinary.uploader.upload(image,{
+      folder: "Chat_images"
+    }
+      );
       imageUrl = uploadResponse.secure_url;
     }
 

@@ -134,14 +134,18 @@ export async function logoutHandler(_, res) {
 
 
 export async function updateProfileHandler(req, res) {
-  try {        
-    
-    if (!req.file) {
-      res.status(400).json({
+  try {           
+    const { image } = req.body
+     console.log(req.body.image.length);
+    if (!image) {
+      return res.status(400).json({
         msg: "please upload profile image first"
       })
     }
-    const uploadResponse = await cloudinary.uploader.upload(req.file.path)
+    const uploadResponse = await cloudinary.uploader.upload(image, {
+      folder: "Chatting_app"
+    })
+
     await userModel.findByIdAndUpdate(req.user._id, {
       profileImg: uploadResponse.secure_url
     })

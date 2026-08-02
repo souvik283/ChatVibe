@@ -6,7 +6,7 @@ import multer  from "multer"
 
 const router = express.Router()
 
-const upload = multer({ dest: "uploads/" });
+// const upload = multer({ dest: "uploads/" });
 // router.use(arcjectProtection)
 
 router.post("/register", signupHandler)
@@ -20,6 +20,6 @@ router.get("/check",checkUserLogin, (req, res)=>{
     })
 })
 
-router.put("/updateprofile",upload.single("profileImg"), checkUserLogin, updateProfileHandler)
+router.put("/updateprofile", checkUserLogin, updateProfileHandler)
 
 export default router
