@@ -1,12 +1,11 @@
-import React from 'react'
-import "../css/error.css"
-import HomePage from './HomePage';
-import { Link } from 'react-router';
+import React from "react";
+import "../css/error.css";
+import HomePage from "./HomePage";
+import { Link } from "react-router";
 
 const Error404 = () => {
-    
   return (
-<div className='errorPage'>
+    <div className="errorPage">
       <header className="top-header"></header>
 
       {/* dust particel */}
@@ -55,7 +54,6 @@ const Error404 = () => {
       </section>
     </div>
   );
-}
+};
 
-
-export default Error404
+export default Error404;

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { UseChatStore } from "../store/useChatStore";
 import { MessageCircleMore } from "lucide-react";
 import SearchChatsBar from "./SearchChatsBar";
+import LoadingContacts from "../components/LoadingContacts";
 
 const AVATAR_GRADIENT = {
   amber: "from-amber-200 to-amber-600",
@@ -34,17 +35,29 @@ function Avatar({ initials, accent }) {
 const GetAllContacts = () => {
   const [activeId, setActiveId] = useState(null);
 
-  const { setActiveTab, allContacts, getChattingContacts, setSelectedUser } = UseChatStore();
+  const {
+    setActiveTab,
+    allContacts,
+    isLoadingUsers,
+    getChattingContacts,
+    setSelectedUser,
+    getChatsOfUser,
+  } = UseChatStore();
 
   const handleAllchats = async (e) => {
     e.preventDefault();
-    await getChattingContacts()
+    await getChattingContacts();
     await setActiveTab("chats");
   };
+
+  if (isLoadingUsers) {
+    return <LoadingContacts />;
+  }
+
   return (
     <div className="flex-1 overflow-y-auto px-2.5 pb-4">
       <button
-        className=" absolute left-5 top-20.5 rounded-xl bg-linear-to-r from-purple-400 to-purple-700 py-1.5 px-2 cursor-pointer"
+        className=" absolute left-5 top-21 rounded-xl bg-linear-to-r from-purple-400 to-purple-700 p-2 cursor-pointer"
         onClick={handleAllchats}
       >
         <MessageCircleMore
@@ -60,8 +73,9 @@ const GetAllContacts = () => {
         <div
           key={c._id}
           onClick={() => {
-            setActiveId(c._id)
-            setSelectedUser(c)
+            setActiveId(c._id);
+            setSelectedUser(c);
+            getChatsOfUser(c._id);
           }}
           className={`mb-0.5 flex cursor-pointer items-center gap-3 rounded-2xl px-2.5 py-2.5 transition ${
             activeId === c._id
@@ -69,7 +83,15 @@ const GetAllContacts = () => {
               : "hover:bg-white/5"
           }`}
         >
-          <Avatar initials={c.name.substr(0, 2)} accent={"rose"} />
+          {c.profileImg == "" ? (
+            <Avatar initials={c.name.substr(0, 2)} accent={"rose"} />
+          ) : (
+            <div className="avatar avatar-ofline cursor-pointer">
+              <div className="w-10 rounded-full">
+                <img src={`${c.profileImg}`} />
+              </div>
+            </div>
+          )}
           <div className="min-w-0 flex-1">
             <div className="flex items-baseline justify-between gap-1.5">
               <span className="truncate text-sm font-semibold">{c.name}</span>

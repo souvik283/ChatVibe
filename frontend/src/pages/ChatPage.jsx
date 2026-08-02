@@ -1,21 +1,13 @@
-import React from 'react'
-import { useAuthStore } from '../store/useAuthStore'
-import { Link } from 'react-router'
-import AuroraChat from './NoFound'
+import React from "react";
+import { Link } from "react-router";
+import WholeChatSection from "./ChatPage2";
 
 const ChatPage = () => {
-  const {logout} = useAuthStore()
-
-  const handleLogout = (e)=>{
-    e.preventDefault()
-    logout()
-  }
   return (
-    <div className=' flex items-center justify-center min-h-screen'>
-      <AuroraChat/>
-      
+    <div className=" flex items-center justify-center min-h-screen">
+      <WholeChatSection />
     </div>
-  )
-}
+  );
+};
 
-export default ChatPage
+export default ChatPage;
