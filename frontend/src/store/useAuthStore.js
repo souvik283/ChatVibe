@@ -1,9 +1,12 @@
 import { create } from "zustand";
 import axiosInstance from "../lib/axios.js";
 import toast from "react-hot-toast";
-import { io,} from "socket.io-client"
+import { io } from "socket.io-client";
 
- const baseURL = import.meta.env.MODE === "development" ? "http://localhost:2000" : "https://chatvibe-backend-clce.onrender.com"
+const baseURL =
+  import.meta.env.MODE === "development"
+    ? "http://localhost:2000"
+    : "https://chatvibe-backend-clce.onrender.com";
 // const baseURL = "http://localhost:2000"
 
 export const useAuthStore = create((set, get) => ({
@@ -20,7 +23,7 @@ export const useAuthStore = create((set, get) => ({
       const res = await axiosInstance.get("/auth/check");
 
       set({ authUser: res.data });
-      // get().connectSocket()
+      get().connectSocket()
     } catch (error) {
       console.log("Error in auth check: ", error);
       set({ authUser: null });
@@ -55,11 +58,11 @@ export const useAuthStore = create((set, get) => ({
       set({ isCheckingAuth: true });
       toast.success("Logged In Successfully!");
       await set({ authUser: res.data });
-      
+
       setTimeout(() => {
         set({ isCheckingAuth: false });
       }, 300);
-      get().connectSocket()
+      get().connectSocket();
       return true;
     } catch (error) {
       console.log(error);
@@ -87,7 +90,7 @@ export const useAuthStore = create((set, get) => ({
 
   uploadProfileImg: async (image) => {
     try {
-       await axiosInstance.put("/auth/updateprofile", { image });
+      await axiosInstance.put("/auth/updateprofile", { image });
       // console.log(res.data);
       toast.success("Image Uploaded Successfully!");
     } catch (error) {
@@ -98,7 +101,7 @@ export const useAuthStore = create((set, get) => ({
 
   updateName: async (name) => {
     try {
-       await axiosInstance.put("/auth/updatename", { name });
+      await axiosInstance.put("/auth/updatename", { name });
       // console.log(res.data);
       toast.success("Name Updated Successfully!");
     } catch (error) {
@@ -107,29 +110,30 @@ export const useAuthStore = create((set, get) => ({
     }
   },
 
-  connectSocket: ()=>{
-    const {authUser} = get()
+  connectSocket: () => {
+    const { authUser } = get();
 
-    if(!authUser?.user || get().socket?.connected) return
-    
+    if (!authUser?.user || get().socket?.connected) return;
+
     // console.log(get().onlineUsers);
-    
+
     const socket = io(baseURL, {
       withCredentials: true,
       reconnection: true,
-  reconnectionAttempts: Infinity,
-  reconnectionDelay: 1000,
-    })
+      reconnectionAttempts: Infinity,
+      reconnectionDelay: 1000,
+      transports: ["websocket"],
+    });
 
     // socket.connect()
-    
-    set({socket})    
-    socket.on("getOnlineUsers", (userIds)=>{  
-      set({onlineUsers: userIds})
-    })
+
+    set({ socket });
+    socket.on("getOnlineUsers", (userIds) => {
+      set({ onlineUsers: userIds });
+    });
   },
 
-  disconnectSocket: ()=>{
-    if (get().socket?.connected) get().socket.disconnect()
-  }
+  disconnectSocket: () => {
+    if (get().socket?.connected) get().socket.disconnect();
+  },
 }));

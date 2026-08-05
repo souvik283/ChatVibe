@@ -17,9 +17,7 @@ const App = () => {
     checkAuth();
   }, []);
 
-  useEffect(()=>{
-    connectSocket()
-  }, [authUser, connectSocket])
+
 
   // console.log({ authUser });
 
