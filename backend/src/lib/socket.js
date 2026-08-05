@@ -7,11 +7,17 @@ import { socketAuthMiddleware } from "../middlewares/socket.auth.middleware.js";
 const app = express();
 const server = http.createServer(app);
 
-const originLink = ENV.node_environment === "development" ? ENV.client_url: ENV.host_web_url
+// const originLink = ENV.node_environment === "development" ? ENV.client_url : ENV.host_web_url
+
+const allowedOrigins = [
+  "http://localhost:5173",
+  ENV.host_web_url
+].filter(Boolean);
+
 
 const io = new Server(server, {
   cors: {
-    origin: [originLink],
+    origin: allowedOrigins,
     credentials: true,
   },
 });
@@ -34,8 +40,10 @@ io.on("connection", (socket) => {
 
   io.emit("getOnlineUsers", Object.keys(userSocketmap));
 
-  socket.on("disconnect", () => {
+  socket.on("disconnect", (reason) => {
     console.log("A user disconnected: ", socket.user.name);
+    console.log(reason);
+    
     delete userSocketmap[userId];
     io.emit("getOnlineUsers", Object.keys(userSocketmap));
   });
