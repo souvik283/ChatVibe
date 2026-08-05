@@ -115,7 +115,10 @@ export const useAuthStore = create((set, get) => ({
     // console.log(get().onlineUsers);
     
     const socket = io(baseURL, {
-      withCredentials: true
+      withCredentials: true,
+      reconnection: true,
+  reconnectionAttempts: Infinity,
+  reconnectionDelay: 1000,
     })
 
     // socket.connect()
