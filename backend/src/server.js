@@ -15,7 +15,9 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
 // app.use(express.json());
 app.use(cookieParser());
 
-app.use(cors({ origin: ENV.client_url, credentials: true }));
+const corsLink = ENV.node_environment === "development" ? ENV.client_url : ENV.host_web_url
+
+app.use(cors({ origin: corsLink, credentials: true }));
 
 const __dirname = path.resolve();
 
@@ -32,7 +34,10 @@ if (ENV.node_environment === "production") {
   });
 }
 
-server.listen(ENV.port, () => {
-  console.log(`Server started at port: ${ENV.port}`);
+const PORT = ENV.port|| 2000;
+
+
+server.listen(PORT, () => {
+  console.log(`Server started at port: ${PORT}`);
   ConnectDb();
 });
