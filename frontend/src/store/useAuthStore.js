@@ -78,7 +78,7 @@ export const useAuthStore = create((set, get) => ({
       set({ isCheckingAuth: true });
       toast.success("Logged Out Successfully!");
       set({ authUser: null });
-      // get().disconnectSocket()
+      get().disconnectSocket()
       setTimeout(() => {
         set({ isCheckingAuth: false });
       }, 300);
@@ -133,7 +133,7 @@ export const useAuthStore = create((set, get) => ({
     });
   },
 
-  // disconnectSocket: () => {
-  //   if (get().socket?.connected) get().socket.disconnect();
-  // },
+  disconnectSocket: () => {
+    if (get().socket?.connected) get().socket.disconnect();
+  },
 }));

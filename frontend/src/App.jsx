@@ -15,7 +15,8 @@ const App = () => {
 
   useEffect(() => {
     checkAuth();
-  }, []);
+    connectSocket()
+  }, [checkAuth, connectSocket]);
 
 
 
