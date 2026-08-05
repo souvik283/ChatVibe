@@ -1,8 +1,5 @@
 # 💬 ChatVibe
 
-<p align="center">
-  <img src="./Screenshot%202026-08-05%20113346.png" alt="ChatVibe Hero" width="100%">
-</p>
 
 <p align="center">
 A modern real-time chat application built with the MERN stack and Socket.IO, featuring a sleek dark UI, instant messaging, online presence, image sharing, and responsive design.
