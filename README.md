@@ -57,45 +57,6 @@ A modern real-time chat application built with the MERN stack and Socket.IO, fea
 - JWT Authentication
 - Cloudinary (Image Upload)
 
----
-
-## 🚀 Installation
-
-```bash
-git clone https://github.com/your-username/chatvibe.git
-
-cd chatvibe
-
-# Install backend
-cd backend
-npm install
-
-# Install frontend
-cd ../frontend
-npm install
-```
-
-Run the project:
-
-```bash
-# Backend
-npm run dev
-
-# Frontend
-npm run dev
-```
-
----
-
-## 📂 Project Structure
-
-```text
-chatvibe/
-├── backend/
-├── frontend/
-├── README.md
-└── ...
-```
 
 ---
 
@@ -109,13 +70,6 @@ chatvibe/
 
 ---
 
-## 📸 Screenshots
-
-| Landing Page | Chat Screen |
-|--------------|-------------|
-| ![](./Screenshot%202026-08-05%20113346.png) | ![](./Screenshot%202026-08-05%20113229.png) |
-
----
 
 ## 👨‍💻 Author
 
