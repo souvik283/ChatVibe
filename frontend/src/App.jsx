@@ -11,13 +11,17 @@ import { Toaster } from "react-hot-toast";
 import LoaderIcon from "./components/LoaderIcon";
 
 const App = () => {
-  const { authUser, isCheckingAuth, checkAuth } = useAuthStore();
+  const { authUser, isCheckingAuth, checkAuth, connectSocket} = useAuthStore();
 
   useEffect(() => {
     checkAuth();
   }, []);
 
-  console.log({ authUser });
+  useEffect(()=>{
+    connectSocket()
+  }, [authUser, connectSocket])
+
+  // console.log({ authUser });
 
   if (isCheckingAuth) {
     return (
