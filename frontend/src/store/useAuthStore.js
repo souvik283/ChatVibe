@@ -115,13 +115,10 @@ export const useAuthStore = create((set, get) => ({
 
     if (!authUser?.user || get().socket?.connected) return;
 
-    // console.log(get().onlineUsers);
+    console.log(baseURL);
 
     const socket = io(baseURL, {
       withCredentials: true,
-      reconnection: true,
-      reconnectionAttempts: Infinity,
-      reconnectionDelay: 1000,
       transports: ["websocket"],
     });
 
