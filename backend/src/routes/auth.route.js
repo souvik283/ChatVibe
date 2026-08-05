@@ -1,5 +1,5 @@
 import express from "express"
-import {signupHandler, loginHandler, logoutHandler, updateProfileHandler} from "../controllers/auth.controller.js"
+import {signupHandler, loginHandler, logoutHandler, updateProfileHandler, updateNameHandler} from "../controllers/auth.controller.js"
 import {checkUserLogin} from "../middlewares/auth.middleware.js"
 import arcjectProtection from "../middlewares/arcjet.middleware.js"
 import multer  from "multer"
@@ -21,5 +21,6 @@ router.get("/check",checkUserLogin, (req, res)=>{
 })
 
 router.put("/updateprofile", checkUserLogin, updateProfileHandler)
+router.put("/updatename", checkUserLogin, updateNameHandler)
 
 export default router

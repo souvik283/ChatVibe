@@ -7,7 +7,8 @@ import messageRoute from "./routes/message.route.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 
-const app = express();
+import {app, server} from "./lib/socket.js"
+
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 // app.use(express.urlencoded({ extended: false }));
@@ -31,7 +32,7 @@ if (ENV.node_environment === "production") {
   });
 }
 
-app.listen(ENV.port, () => {
+server.listen(ENV.port, () => {
   console.log(`Server started at port: ${ENV.port}`);
   ConnectDb();
 });

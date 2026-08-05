@@ -136,7 +136,7 @@ export async function logoutHandler(_, res) {
 export async function updateProfileHandler(req, res) {
   try {           
     const { image } = req.body
-     console.log(req.body.image.length);
+    //  console.log(req.body.image.length);
     if (!image) {
       return res.status(400).json({
         msg: "please upload profile image first"
@@ -148,6 +148,32 @@ export async function updateProfileHandler(req, res) {
 
     await userModel.findByIdAndUpdate(req.user._id, {
       profileImg: uploadResponse.secure_url
+    })
+    
+      return res.status(200).json({
+        msg: "Profile updated successfully",
+      })
+
+  } catch (error) {
+    return res.status(400).json({
+      message: "Internal srver errror"
+      })
+  }
+}
+
+
+export async function updateNameHandler(req, res) {
+  try {           
+    const { name } = req.body
+    if (!name) {
+      return res.status(400).json({
+        msg: "please enter your name first"
+      })
+    }
+    
+
+    await userModel.findByIdAndUpdate(req.user._id, {
+      name: name
     })
     
       return res.status(200).json({

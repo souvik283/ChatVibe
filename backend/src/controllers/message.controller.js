@@ -2,6 +2,7 @@ import cloudinary from "../lib/cloudinary.js";
 import messageModel from "../models/message.model.js";
 import userModel from "../models/User.js";
 import mongoose from "mongoose";
+import { getRecieverSocketId, io } from "../lib/socket.js";
 
 export async function getAllContactsHandler(req, res) {
   try {
@@ -11,10 +12,10 @@ export async function getAllContactsHandler(req, res) {
       .find({
         _id: { $ne: loggedUserId },
       })
-      .select("name profileImg");
+      .select("name profileImg createdAt");
 
     return res.status(200).json({
-      contactUsers: contactUsers
+      contactUsers: contactUsers,
     });
   } catch (error) {
     return res.status(500).json({
@@ -61,38 +62,38 @@ export async function sendMessageToUser(req, res) {
     }
 
     const senderId = req.user._id;
-    const recieverId  = req.params.id;
+    const recieverId = req.params.id;
 
     if (senderId.equals(recieverId)) {
-        return res.status(400).json({
-            message: "Cannot send message to yourself"
-        })
+      return res.status(400).json({
+        message: "Cannot send message to yourself",
+      });
     }
 
     if (!mongoose.Types.ObjectId.isValid(recieverId)) {
-    return res.status(400).json({
-        message: "Invalid receiver ID"
-    });
-}
+      return res.status(400).json({
+        message: "Invalid receiver ID",
+      });
+    }
 
     const recieverExists = await userModel.exists({
-        _id: recieverId
-    })
+      _id: recieverId,
+    });
 
     if (!recieverExists) {
-        return res.status(404).json({
-            message: "Reciever not found"
-        })
+      return res.status(404).json({
+        message: "Reciever not found",
+      });
     }
 
     let imageUrl;
     if (image) {
-      const uploadResponse = await cloudinary.uploader.upload(image,{
-      folder: "Chat_images"
-    }
-      );
+      const uploadResponse = await cloudinary.uploader.upload(image, {
+        folder: "Chat_images",
+      });
       imageUrl = uploadResponse.secure_url;
     }
+
 
     const newMessage = await messageModel.create({
       senderId,
@@ -101,12 +102,17 @@ export async function sendMessageToUser(req, res) {
       image: imageUrl,
     });
 
+    const recieverSocketId = getRecieverSocketId(recieverId)
+    if (recieverSocketId) {      
+      await io.to(recieverSocketId).emit("newMessage", newMessage)
+    }
+
     return res.status(201).json({
       message: "Message sent successfully",
     });
   } catch (error) {
     console.log(error);
-    
+
     return res.status(501).json({
       message: "Internal Server Error",
     });
@@ -131,9 +137,11 @@ export async function getChatsHandler(req, res) {
       ),
     ];
 
-    const chatPartners = await userModel.find({
-      _id: { $in: chatPartnerId },
-    }).select("name profileImg")
+    const chatPartners = await userModel
+      .find({
+        _id: { $in: chatPartnerId },
+      })
+      .select("name profileImg createdAt");
 
     return res.status(201).json({
       chatPartners: chatPartners,
