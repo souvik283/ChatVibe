@@ -5,19 +5,37 @@ import { useAuthStore } from "../store/useAuthStore";
 import LoadingMessages from "../components/LoadingMessages";
 
 const BodyChatSection = () => {
-  const { messages, selectedUser, isLoadingMessages } = UseChatStore();
+  const {
+    messages,
+    selectedUser,
+    isLoadingMessages,
+    subscribeToMessage,
+    unsubscribeFromMessage,
+    isSoundEnabled
+  } = UseChatStore();
   const { authUser } = useAuthStore();
 
   const scrollRef = useRef(null);
 
   const [previewImg, setPreviewImg] = useState(null);
 
-  useEffect(() => {}, [messages.length]);
+useEffect(()=>{
+  
+}, [messages.length])
+
+  useEffect(() => {
+    subscribeToMessage()
+
+   return () => unsubscribeFromMessage()
+  }, [selectedUser,isSoundEnabled, subscribeToMessage, unsubscribeFromMessage]);
 
   useLayoutEffect(() => {
     if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-    }
+  scrollRef.current.scrollTo({
+    top: scrollRef.current.scrollHeight,
+    behavior: "smooth",
+  });
+}
   });
 
   const removePreviewImage = (e) => {

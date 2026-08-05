@@ -4,6 +4,8 @@ import { UseChatStore } from "../store/useChatStore";
 import toast from "react-hot-toast";
 import useKeyBoardSound from "../hooks/keyboardSound";
 
+const mouseClickSound = new Audio("/sound/mouseClick.mp3");
+
 const FooterChatSection = () => {
   const [text, setText] = useState("");
   const [imagePreview, setImagePreview] = useState(null);
@@ -72,7 +74,13 @@ const FooterChatSection = () => {
       <div className="flex flex-shrink-0 gap-3.5 ">
         <button
           className="grid h-9 w-9 shrink-0 cursor-pointer place-items-center rounded-lg text-slate-400 hover:bg-white/10 hover:text-white"
-          onClick={() => chatImgInputRef.current.click()}
+          onClick={() => {
+            chatImgInputRef.current.click();
+            if (isSoundEnabled) {
+              mouseClickSound.currentTime = 0;
+              mouseClickSound.play().catch((e) => console.log(e));
+            }
+          }}
         >
           <Paperclip size={17} />
         </button>

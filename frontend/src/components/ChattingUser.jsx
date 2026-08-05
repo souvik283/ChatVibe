@@ -2,34 +2,29 @@ import React, { useState } from "react";
 import { UseChatStore } from "../store/useChatStore";
 import { MessageCircle } from "lucide-react";
 import LoadingContacts from "./LoadingContacts";
+import { useAuthStore } from "../store/useAuthStore";
 
-const AVATAR_GRADIENT = {
-  amber: "from-amber-200 to-amber-600",
-  fuchsia: "from-fuchsia-200 to-fuchsia-600",
-  sky: "from-sky-200 to-sky-600",
-  rose: "from-rose-200 to-rose-600",
-};
+const mouseClickSound = new Audio("/sound/mouseClick.mp3");
 
-function Avatar({ initials }) {
-  const accent = "amber";
-  const size = "";
-  const status = "ofline";
-  const dim =
-    size === "sm"
-      ? "w-9 h-9 text-xs"
-      : size === "lg"
-        ? "w-11 h-11 text-sm"
-        : "w-10 h-10 text-sm";
+const AVATAR_GRADIENT = [
+  "from-amber-200 to-amber-600",
+  "from-fuchsia-200 to-fuchsia-600",
+  "from-sky-200 to-sky-600",
+  "from-rose-200 to-rose-600",
+];
+
+function Avatar({ initials, status, number }) {
+  let i = number % 3;
   return (
     <div className="relative shrink-0">
       <div
-        className={`${dim} uppercase rounded-full flex items-center justify-center font-semibold text-slate-900 bg-gradient-to-br ${AVATAR_GRADIENT[accent]} shadow-lg shadow-black/30 ring-1 ring-white/10`}
+        className={`w-10 h-10 text-sm uppercase rounded-full flex items-center justify-center font-semibold text-slate-900 bg-gradient-to-br ${AVATAR_GRADIENT[i]} shadow-lg shadow-black/30 ring-1 ring-white/10`}
         style={{ fontFamily: "'Fraunces', serif" }}
       >
         {initials}
       </div>
       {status === "online" && (
-        <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-400 ring-2 ring-slate-950" />
+        <span className="absolute top-0.5 right-0.5 w-2 h-2 rounded-full bg-emerald-400 ring-2 ring-slate-950" />
       )}
     </div>
   );
@@ -37,9 +32,14 @@ function Avatar({ initials }) {
 
 const ChattingUser = () => {
   const [activeId, setActiveId] = useState();
-  const { chatContacts, setSelectedUser, getChatsOfUser, isLoadingUsers } =
-    UseChatStore();
-  // console.log(chatContacts);
+  const {
+    chatContacts,
+    setSelectedUser,
+    getChatsOfUser,
+    isLoadingUsers,
+    isSoundEnabled,
+  } = UseChatStore();
+  const { onlineUsers } = useAuthStore();
 
   if (isLoadingUsers) {
     return <LoadingContacts />;
@@ -73,6 +73,10 @@ const ChattingUser = () => {
         <div
           key={c._id}
           onClick={() => {
+            if (isSoundEnabled) {
+              mouseClickSound.currentTime = 0;
+              mouseClickSound.play().catch((e) => console.log(e));
+            }
             setActiveId(c._id);
             setSelectedUser(c);
             getChatsOfUser(c._id);
@@ -84,9 +88,17 @@ const ChattingUser = () => {
           }`}
         >
           {c.profileImg == "" ? (
-            <Avatar initials={c.name.substr(0, 2)} accent />
+            <Avatar
+              initials={c.name.substr(0, 2)}
+              status={onlineUsers.includes(c._id) ? "online" : "ofline"}
+              number={c.createdAt.slice(17, 19)}
+            />
           ) : (
-            <div className="avatar avatar-ofline cursor-pointer">
+            <div
+              className={`avatar cursor-pointer ${
+                onlineUsers.includes(c._id) ? "avatar-online" : null
+              }`}
+            >
               <div className="w-10 rounded-full">
                 <img src={`${c.profileImg}`} />
               </div>

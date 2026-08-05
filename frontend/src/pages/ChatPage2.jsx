@@ -12,6 +12,8 @@ import FooterChatSection from "../components/FooterChatSection";
 import HeaderChatSection from "../components/HeaderChatSection";
 import BodyChatSection from "../components/BodyChatSection";
 
+const mouseClickSound = new Audio("/sound/mouseClick.mp3");
+
 export default function WholeChatSection() {
   // const scrollRef = useRef(null);
 
@@ -21,10 +23,15 @@ export default function WholeChatSection() {
     activeTab,
     getChattingContacts,
     selectedUser,
+    isSoundEnabled,
   } = UseChatStore();
 
   const handleGetAllContacts = async (e) => {
     e.preventDefault();
+    if (isSoundEnabled) {
+      mouseClickSound.currentTime = 0;
+      mouseClickSound.play().catch((e) => console.log(e));
+    }
     await getContacts();
     await setActiveTab("contacts");
   };
@@ -37,7 +44,7 @@ export default function WholeChatSection() {
     if (activeTab == "chats") {
       handleGetChatContacts();
     }
-  }, [selectedUser]);
+  }, [activeTab]);
 
   return (
     <div className="relative max-w-6xl  h-[640px] w-full overflow-hidden bg-gradient-to-br from-indigo-950 via-slate-950 to-black text-stone-100 font-sans rounded-xl">

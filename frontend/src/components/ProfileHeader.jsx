@@ -1,7 +1,17 @@
-import React, { useRef, useState } from "react";
-import { Radio, BellOff, LogOut, SquarePen, Bell, Upload } from "lucide-react";
+import React, { useEffect, useRef, useState } from "react";
+import {
+  Radio,
+  BellOff,
+  LogOut,
+  SquarePen,
+  Bell,
+  Upload,
+  UserPen,
+} from "lucide-react";
 import { useAuthStore } from "../store/useAuthStore";
 import { UseChatStore } from "../store/useChatStore";
+import Swal from "sweetalert2";
+import "sweetalert2/themes/bulma.css";
 
 const mouseClickSound = new Audio("/sound/mouseClick.mp3");
 
@@ -16,16 +26,19 @@ function Avatar({ initials, fileInputRef }) {
         {initials}
       </div>
 
-      <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-400 ring-2 ring-slate-950" />
+      <span className="absolute top-0.5 right-0.5 w-2 h-2 rounded-full bg-emerald-400 ring-2 ring-slate-950" />
     </div>
   );
 }
 
 export const ProfileHeader = () => {
   const [opacity, setOpacity] = useState(0);
-  const { authUser, uploadProfileImg, logout } = useAuthStore();
+  const { authUser, uploadProfileImg, logout, updateName } = useAuthStore();
   const { toggleSound, isSoundEnabled } = UseChatStore();
   const [image, setImage] = useState("");
+  const [name, setName] = useState(authUser.user.name);
+
+  useEffect(() => {}, [authUser]);
 
   const fileInputRef = useRef(null);
 
@@ -43,8 +56,43 @@ export const ProfileHeader = () => {
     };
   };
 
-  const handleLogout = () => {
-    logout();
+  const handleLogout = async () => {
+    if (isSoundEnabled) {
+      mouseClickSound.currentTime = 0;
+      mouseClickSound.play().catch((e) => console.log(e));
+    }
+    const result = await Swal.fire({
+      title: "Logout?",
+      theme: "dark",
+      text: "Are you sure you want to log out?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Logout",
+      cancelButtonText: "Cancel",
+      confirmButtonColor: "#dc2626",
+    });
+    if (result.isConfirmed) {
+      logout();
+    }
+  };
+
+  const handleChangeName = async () => {
+    if (isSoundEnabled) {
+      mouseClickSound.currentTime = 0;
+      mouseClickSound.play().catch((e) => console.log(e));
+    }
+    const { value: name } = await Swal.fire({
+      title: "Enter Your new name",
+      theme: "dark",
+      input: "text",
+      inputLabel: "Enter Your Name",
+      inputPlaceholder: "Enter your New Name",
+    });
+
+    if (name) {
+      updateName(name);
+      setName(name);
+    }
   };
 
   return (
@@ -53,6 +101,12 @@ export const ProfileHeader = () => {
         type="file"
         accept="image/*"
         ref={fileInputRef}
+        onClick={() => {
+          if (isSoundEnabled) {
+            mouseClickSound.currentTime = 0;
+            mouseClickSound.play().catch((e) => console.log(e));
+          }
+        }}
         onChange={handleImageUpload}
         className=" hidden"
       ></input>
@@ -80,7 +134,7 @@ export const ProfileHeader = () => {
             {authUser.user.name.substr(0, 2)}
           </div>
 
-          <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-400 ring-2 ring-slate-950" />
+          <span className="absolute top-0.5 right-0.5 w-2 h-2 rounded-full bg-emerald-400 ring-2 ring-slate-950" />
         </div>
       ) : (
         <div className="avatar avatar-online cursor-pointer">
@@ -95,7 +149,13 @@ export const ProfileHeader = () => {
           className="text-base font-semibold"
           style={{ fontFamily: "'Fraunces', serif" }}
         >
-          {authUser.user.name}
+          {name}
+          <button
+            className=" ml-2 mt-0.5 cursor-pointer"
+            onClick={handleChangeName}
+          >
+            <UserPen size={14} />
+          </button>
         </div>
         <div className="mt-0.5 flex items-center gap-1 text-[11px] text-slate-400">
           <Radio size={10} strokeWidth={2.5} /> Connected

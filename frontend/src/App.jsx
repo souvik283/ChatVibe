@@ -38,7 +38,7 @@ const App = () => {
         />
         <Route
           path="/chat"
-          element={authUser ? <ChatPage /> : <Navigate to={"/login"} />}
+          element={authUser ? <ChatPage /> : <Navigate to={"/"} />}
         />
         <Route path="*" element={<Error404 />} />
       </Routes>
