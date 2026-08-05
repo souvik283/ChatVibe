@@ -3,8 +3,8 @@ import axiosInstance from "../lib/axios.js";
 import toast from "react-hot-toast";
 import { io,} from "socket.io-client"
 
-//  const baseURL = import.meta.env.MODE === "development" ? "http://localhost:2000" : "/",
-const baseURL = "http://localhost:2000"
+ const baseURL = import.meta.env.MODE === "development" ? "http://localhost:2000" : "https://chatvibe-backend-clce.onrender.com"
+// const baseURL = "http://localhost:2000"
 
 export const useAuthStore = create((set, get) => ({
   authUser: null,

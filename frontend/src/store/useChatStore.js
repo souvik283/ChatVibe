@@ -52,7 +52,7 @@ export const UseChatStore = create((set, get) => ({
       //   toast.success("Successful")
     } catch (error) {
       console.log("error: ", error);
-      toast.error(error.response.data);
+      toast.error(error.response?.data || "Failed to getting Contacts");
     } finally {
       set({ isLoadingUsers: false });
     }
