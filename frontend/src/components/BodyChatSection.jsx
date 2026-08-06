@@ -21,7 +21,7 @@ const BodyChatSection = () => {
 
 useEffect(()=>{
   
-}, [messages.length])
+}, [messages.length, selectedUser])
 
   useEffect(() => {
     subscribeToMessage()
@@ -101,11 +101,11 @@ useEffect(()=>{
       {messages.map((m) => (
         <div
           key={m._id}
-          className={`flex ${m.senderId === authUser.user._id ? "justify-end" : "justify-start"}`}
+          className={`flex ${m.recieverId === selectedUser._id ? "justify-end" : "justify-start"}`}
         >
           <div
             className={`max-w-[62%] rounded-2xl px-3 py-2 text-sm leading-relaxed ${
-              m.senderId === authUser.user._id
+              m.recieverId === selectedUser._id
                 ? "rounded-br-md bg-gradient-to-br from-amber-200 to-amber-500 font-medium text-amber-950"
                 : "rounded-bl-md border border-white/10 bg-white/5 text-stone-100"
             }`}
@@ -129,7 +129,7 @@ useEffect(()=>{
             <div>{m.text}</div>
             <div
               className={` flex justify-self-end items-center gap-1 text-[10.5px] ${
-                m.from === authUser.user._id
+                m.recieverId === selectedUser._id
                   ? "justify-end text-amber-900/70"
                   : "text-slate-500"
               }`}

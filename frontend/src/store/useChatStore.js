@@ -13,6 +13,8 @@ export const UseChatStore = create((set, get) => ({
   isLoadingUsers: false,
   isLoadingMessages: false,
   isSendingMessages: false,
+  searchAllContacts : [],
+  searchChatContacts : [],
 
   isSoundEnabled: JSON.parse(localStorage.getItem("isSoundEnabled")) === true,
 
@@ -26,6 +28,24 @@ export const UseChatStore = create((set, get) => ({
   setSelectedUser: (user) => {
     // console.log(user);
     set({ selectedUser: user });
+  },
+
+  setSearchAllContacts: async (searchContacts) => {
+    try {
+      await set({searchAllContacts: searchContacts})
+    } catch (error) {
+      console.log(error);
+      toast.error("Unable to search")  
+    }
+  },
+
+   setSearchChatContacts: async (searchContacts) => {
+    try {
+      await set({searchChatContacts: searchContacts})
+    } catch (error) {
+      console.log(error);
+      toast.error("Unable to search")  
+    }
   },
 
   getContacts: async () => {

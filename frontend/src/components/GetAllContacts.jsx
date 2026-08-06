@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { UseChatStore } from "../store/useChatStore";
 import { MessageCircleMore } from "lucide-react";
@@ -37,13 +37,18 @@ const GetAllContacts = () => {
 
   const {
     setActiveTab,
-    allContacts,
     isLoadingUsers,
     getChattingContacts,
     setSelectedUser,
     getChatsOfUser,
     isSoundEnabled,
+    searchAllContacts
   } = UseChatStore();
+
+//   useEffect(() => {
+// console.log(searchContacts);
+
+//   },[searchContacts])
 
   const { onlineUsers } = useAuthStore();
 
@@ -76,7 +81,7 @@ const GetAllContacts = () => {
 
       <SearchChatsBar />
 
-      {allContacts.map((c) => (
+      {searchAllContacts.map((c) => (
         <div
           key={c._id}
           onClick={() => {
@@ -128,11 +133,11 @@ const GetAllContacts = () => {
           </div>
         </div>
       ))}
-      {/* {filtered.length === 0 && (
+      {searchAllContacts.length === 0 && (
                 <div className="px-2.5 py-6 text-center text-sm text-slate-500">
-                  No one matches "{query}"
+                  No one matches 
                 </div>
-              )} */}
+              )}
     </div>
   );
 };

@@ -65,7 +65,13 @@ const FooterChatSection = () => {
         <img src={imagePreview} alt="Preview" className=" h-17 rounded-md" />
         <button
           className="absolute opacity-90 -right-1.5 -top-1.5 cursor-pointer bg-linear-to-tl from-indigo-900 via-slate-900 to-black rounded-full p-0.5"
-          onClick={handleRemoveImage}
+          onClick={()=>{
+             if (isSoundEnabled) {
+              mouseClickSound.currentTime = 0;
+              mouseClickSound.play().catch((e) => console.log(e));
+            }
+            handleRemoveImage()
+          }}
         >
           <X color="#fff" size={15} />
         </button>
@@ -91,6 +97,12 @@ const FooterChatSection = () => {
             setText(e.target.value);
             {
               if (isSoundEnabled) playRandomKeyStroke();
+            }
+          }}
+          onClick={()=>{
+             if (isSoundEnabled) {
+              mouseClickSound.currentTime = 0;
+              mouseClickSound.play().catch((e) => console.log(e));
             }
           }}
           onKeyDown={(e) => {

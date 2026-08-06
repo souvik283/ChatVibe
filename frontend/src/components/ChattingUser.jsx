@@ -3,6 +3,7 @@ import { UseChatStore } from "../store/useChatStore";
 import { MessageCircle } from "lucide-react";
 import LoadingContacts from "./LoadingContacts";
 import { useAuthStore } from "../store/useAuthStore";
+import SearchBar2 from "./SearchBar2";
 
 const mouseClickSound = new Audio("/sound/mouseClick.mp3");
 
@@ -38,6 +39,7 @@ const ChattingUser = () => {
     getChatsOfUser,
     isLoadingUsers,
     isSoundEnabled,
+    searchChatContacts
   } = UseChatStore();
   const { onlineUsers } = useAuthStore();
 
@@ -69,7 +71,8 @@ const ChattingUser = () => {
 
   return (
     <div className="flex-1 overflow-y-auto px-2.5 pb-4">
-      {chatContacts.map((c) => (
+      <SearchBar2/>
+      {searchChatContacts.map((c) => (
         <div
           key={c._id}
           onClick={() => {
@@ -124,9 +127,9 @@ const ChattingUser = () => {
           </div>
         </div>
       ))}
-      {/* {filtered.length === 0 && (
-              <div className="px-2.5 py-6 text-center text-sm text-slate-500">No one matches "{query}"</div>
-            )} */}
+      {searchChatContacts.length === 0 && (
+              <div className="px-2.5 py-6 text-center text-sm text-slate-500">No one matches</div>
+            )} 
     </div>
   );
 };
