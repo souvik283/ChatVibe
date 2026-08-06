@@ -119,6 +119,9 @@ export const useAuthStore = create((set, get) => ({
 
     const socket = io(baseURL, {
       withCredentials: true,
+      reconnection: true,
+      reconnectionAttempts: Infinity,
+      reconnectionDelay: 1000,
       transports: ["websocket"],
     });
 
