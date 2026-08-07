@@ -70,7 +70,7 @@ const HeaderChatSection = () => {
         >
           {selectedUser.name}
         </div>
-        <div className="mt-0.5 text-xs text-slate-400">{"12:34"}</div>
+        <div className="mt-0.5 text-xs text-slate-400"></div>
       </div>
       <button className="grid h-8 w-8 place-items-center rounded-lg text-slate-400 hover:bg-white/10 hover:text-white">
         <MoreVertical size={17} />
