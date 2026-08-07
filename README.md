@@ -7,6 +7,14 @@ A modern real-time chat application built with the MERN stack and Socket.IO, fea
 
 ---
 
+## 🚀 Try it Live
+
+👉 **Live Website:** https://chatvibe-r1ox.onrender.com
+
+> Create an account and start chatting instantly in real time.
+
+---
+
 ## ✨ Features
 
 - 🔐 Secure user authentication
